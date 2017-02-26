@@ -1,7 +1,7 @@
 # FromOnlineJudge
-Problems from some OJ's
+Solutions for problems from some OJ's
 
-Problems Discription will be included in the source file
+Some of them include the problem statement.
 
 
 
