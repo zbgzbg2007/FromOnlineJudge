@@ -24,8 +24,8 @@ This could work since each number in $count$ is a lower bound for the machine, w
 BFS could work, but the running time is too big since the number of states are very big.
 
 \paragraph{523}
-For each index $i$, we first compute the sum from 0 to $i$ and then modulo $k$. We record this number $x_i$ for each index in a set.
-For current index $j$, we check $x_j$: if $x_j$ appears at $i$ before and $j - i > 1$, then output True; or if $x_j == 0$ and $j > 0$, then output True.
+For each index $i$, we first compute the sum from 0 to $i$ and then modulo $k$. We record this number $x_i$ for each index in a dict.
+For current index $j$, we check $x_j$: if $x_j$ first appears at $i$ before and $j - i > 1$, then output True; or if $x_j == 0$ and $j > 0$, then output True.
 The boundary case is $k = 0$, we need to check if there are two adjacent 0's.
 This needs $O(n)$ time and $O(k)$ space.
  
