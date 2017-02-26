@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{color}
+\begin{document}
+\title{
+{Summary for LC alg problems}
+}
+\author{Baigong Zheng}
+\date{}
+\maketitle
+\begin{abstract}
+I will try to summarize the methods, the code will not be here.
+\end{abstract}
+
+\paragraph{517}
+I didn't solve this one at the first time.
+This can be solved in somewhat greedy way. 
+First compute the target number of dresses: the final number of dresses in each machine should be the same, so it is just total number divided by number of machines. If not an integer, then impossible.
+Start from beginning (the leftmost machine), for the current machine $i$, record the number of moves to make it have target number of dresses: if it has more than target, then move all the additional dresses from it to $i+1$; if less than target, then move all needed dresses from $i+1$ to it. 
+Record this number of moves in $count$ array and update the number of dresses in machine $i+1$.
+The result is the maximum in $count$.
+The running time is $O(n)$.
+This could work since each number in $count$ is a lower bound for the machine, which is feasible. (Can be proved by induction: the first $i$ machines have optimal moves and we do not need to worry about them.)
+BFS could work, but the running time is too big since the number of states are very big.
+
+\paragraph{523}
+For each index $i$, we first compute the sum from 0 to $i$ and then modulo $k$. We record this number $x_i$ for each index in a set.
+For current index $j$, we check $x_j$: if $x_j$ appears at $i$ before and $j - i > 1$, then output True; or if $x_j == 0$ and $j > 0$, then output True.
+The boundary case is $k = 0$, we need to check if there are two adjacent 0's.
+This needs $O(n)$ time and $O(k)$ space.
+ 
+\paragraph{524}
+Sort the list into such that the list is decreasing in the length of the string and for the same length it is sorted in lexicographical order.
+Then test each string in this order: if it is a substring of input string $s$ then output the current tested string.
+This needs $O(nm + d \log d)$ time, where $n$ and $m$ are the length of input strings and $d$ is the size of the list.
+
+\paragraph{525}
+Preprocess the numbers: change 0 to -1.
+Then the interval containing same numbers of 1 and -1 has sum 0.
+Now loop the array and compute the sum from 0 to current index. 
+We record the first index for each distinct sum value by a hash map.
+When the sum appears again, we can find the target interval by the recored first index for that sum.
+This runs in $O(n)$ time.
+
+My first try is binary search on the length of the interval, but that does not work, since the result is not contiguous in the lengths. That is, if there is an interval of length $l$, then the subinterval of length $l-2$ may not be a feasible solution. Example: $000111111000$.
+
+
+\paragraph{526}
+Find all the possible numbers for each position (that are divisors and multiples), and then use DFS to try each possible arrangement.
+I'm not sure about the complexity. 
+
+\paragraph{529}
+Reveal the current cell if it is an unrevealed mine.
+Otherwise, check its neighbors (at most 8) and if there is no mine then update it according to the rule and recursively do this for its neighbors; if there is mine as its neighbor, then count the number and update current cell as number.
+
+\paragraph{530}
+Collect all the values into a set, and then transform that into a list.
+Sort the list and then check each two adjacent values to find the minimum absolute difference. 
+The running time is $O(n \log n)$.
+My first try is to enumerate all pairs without sorting, which gives a TLE.
+
+
+\end{document}
