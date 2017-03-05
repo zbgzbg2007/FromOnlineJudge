@@ -12,9 +12,16 @@
 I will try to summarize the methods, the code will not be here.
 \end{abstract}
 
+\paragraph{514}
+We solve this by dynamic programming.
+The state dp[i][j] is the minimum step to finish matching the first $i$ letter and the ring stops at the position $j$ and 
+this position $j$ has the same letter as the $i$-th letter in the key. This can be obtained from dp[i-1][:] by trying the 
+two direction rotation. To improve the running time a little bit, We use dictionary instead of list to store dp[i][j] and
+we only store those position $j$ that has the matched letter for dp[i].
+The running time is $O(n^3)$.
+
 \paragraph{517}
-I didn't solve this one at the first time.
-This can be solved in somewhat greedy way. 
+This can be solved in a greedy way. 
 First compute the target number of dresses: the final number of dresses in each machine should be the same, so it is just total number divided by number of machines. If not an integer, then impossible.
 Start from beginning (the leftmost machine), for the current machine $i$, record the number of moves to make it have target number of dresses: if it has more than target, then move all the additional dresses from it to $i+1$; if less than target, then move all needed dresses from $i+1$ to it. 
 Record this number of moves in $count$ array and update the number of dresses in machine $i+1$.
@@ -58,6 +65,26 @@ Collect all the values into a set, and then transform that into a list.
 Sort the list and then check each two adjacent values to find the minimum absolute difference. 
 The running time is $O(n \log n)$.
 My first try is to enumerate all pairs without sorting, which gives a TLE.
+
+\paragraph{531}
+First count the numbers of 'B' for each column and each row. Then use this information to count the target 'B'.
+Running time $O(n^2)$.
+
+
+\paragraph{532}
+Store the numbers in a dictionary and count their frequency so we can easily check if the target is in the list. 
+Then store the result pairs in a set and return the length of the set. Take care of the corner cases when $k = 0$ 
+and $k$ is negtive.
+Running time is $O(n)$.
+
+
+\paragraph{533}
+First count the number of 'B' for each column and each row. Then compare each pair of rows and count the number of same rows
+for each row. With these information, we can check for each column with $N$ 'B's if there are $N$ same rows with 'B' in that 
+column. 
+Running time is $O(n^3)$ where $n$ is the max length of the row and column. If we transfer each row into a string and use hash to count the number of same strings, the running time could be $O(n^2)$.
+
+
 
 
 \end{document}
