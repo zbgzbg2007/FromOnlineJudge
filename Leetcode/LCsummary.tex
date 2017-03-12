@@ -56,6 +56,12 @@ My first try is binary search on the length of the interval, but that does not w
 Find all the possible numbers for each position (that are divisors and multiples), and then use DFS to try each possible arrangement.
 I'm not sure about the complexity. 
 
+\paragraph{527}
+Try all possible abbreviations. Store the all abbreviations in a dictionary: key is the abbreviation and the value is a list
+containing all the indices of the words in the input whose abbreviation is the key. When the length of a key is larger than 
+one, we try to increase the prefix. Try all the prefix and when the key is uniquely used, add it into answer list.
+
+
 \paragraph{529}
 Reveal the current cell if it is an unrevealed mine.
 Otherwise, check its neighbors (at most 8) and if there is no mine then update it according to the rule and recursively do this for its neighbors; if there is mine as its neighbor, then count the number and update current cell as number.
@@ -84,7 +90,16 @@ for each row. With these information, we can check for each column with $N$ 'B's
 column. 
 Running time is $O(n^3)$ where $n$ is the max length of the row and column. If we transfer each row into a string and use hash to count the number of same strings, the running time could be $O(n^2)$.
 
+\paragraph{536}
+add the first number in the root, and then parse the string to find the next two strings for the subtrees. To parse the 
+string, just count the number of parenthesis: when the numbers are equal, the parse is done. Recursively solve the substrings.
 
 
+\paragraph{539}
+Convert the time into a integer, then sort the list and compare the adjacent two numbers. Don't forget to comopare the first
+and the last number. The distance between two numbers is the min of the absolute difference and 1440 - the abs difference.
+
+\paragraph{541}
+Just reverse the required substrings.
 
 \end{document}
