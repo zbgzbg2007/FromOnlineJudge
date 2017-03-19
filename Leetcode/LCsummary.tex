@@ -94,6 +94,10 @@ Running time is $O(n^3)$ where $n$ is the max length of the row and column. If w
 add the first number in the root, and then parse the string to find the next two strings for the subtrees. To parse the 
 string, just count the number of parenthesis: when the numbers are equal, the parse is done. Recursively solve the substrings.
 
+\paragraph{538}
+Traverse the tree to collect all values in the tree and sort those in dicresing order. For each value $val$, store the sum of 
+all values larger than $val$ in the dictionary indexed by $val$. Update the values in the tree by this dictionary.
+Running time is $O(n \log n)$.
 
 \paragraph{539}
 Convert the time into a integer, then sort the list and compare the adjacent two numbers. Don't forget to comopare the first
@@ -101,5 +105,19 @@ and the last number. The distance between two numbers is the min of the absolute
 
 \paragraph{541}
 Just reverse the required substrings.
+
+\paragraph{542}
+Breadth first search for the distance. Running time is $O(n)$.
+
+\paragraph{543}
+Traverse the tree and return the longest distance in the current subtree and the lenght of the deepest path in current subtree. The answer is the maximum of the two values of the root.
+
+\paragraph{544}
+First construct the sequence of the numbers iteratively, and then convert the numbers into strings recersively.
+First compute the number of roundes, which is the exponent of 2 for $n$. To construct the numbers, for the $i$th round, we start from last sequence of numbers $S^i$. For each number $x$ in $S^i$, we add $x$ and a new number $2^i+1 - x$ after $x$.
+The new sequence $S^{i+1}$ has length twice as $S^i$. The base case is $i = 0$, where $S^0 = \{ 1 \}$.
+After the construction, we recersively combine the numbers into strings. Each time we divide the sequence into two halves 
+and then combine the strings from the two subsequences into a new string. The base case is when there are only two numbers.
+The running time is $O(n)$.
 
 \end{document}
