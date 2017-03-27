@@ -12,6 +12,10 @@
 I will try to summarize the methods, the code will not be here.
 \end{abstract}
 
+\paragraph{507}
+Try every possible number in $[2, \sqrt num]$. If $i$ is a divisor, then subtract $i$ and $num/i$. 
+Running time is $O(\sqrt n)$.
+
 \paragraph{514}
 We solve this by dynamic programming.
 The state dp[i][j] is the minimum step to finish matching the first $i$ letter and the ring stops at the position $j$ and 
@@ -94,6 +98,9 @@ Running time is $O(n^3)$ where $n$ is the max length of the row and column. If w
 add the first number in the root, and then parse the string to find the next two strings for the subtrees. To parse the 
 string, just count the number of parenthesis: when the numbers are equal, the parse is done. Recursively solve the substrings.
 
+\paragraph{537}
+Simulate the computation.
+
 \paragraph{538}
 Traverse the tree to collect all values in the tree and sort those in dicresing order. For each value $val$, store the sum of 
 all values larger than $val$ in the dictionary indexed by $val$. Update the values in the tree by this dictionary.
@@ -119,5 +126,20 @@ The new sequence $S^{i+1}$ has length twice as $S^i$. The base case is $i = 0$, 
 After the construction, we recersively combine the numbers into strings. Each time we divide the sequence into two halves 
 and then combine the strings from the two subsequences into a new string. The base case is when there are only two numbers.
 The running time is $O(n)$.
+
+\paragraph{545}
+Search each boundary and then follow the rules to combine them. Take care of the corner cases.
+
+\paragraph{546}
+Dynamic programming. The state $dp[i][j][k]$ stores the max points we can get from $i$th boxes to $j$th boxes (both inclusive) 
+with additional $k$ boxes of the same value as the $j$th box on the right of the $j$th box. For example, dp[1][3][2] 
+is the max points from the state $\{b_1, b_2, b_3, X, X \}$ where $X = b_3$. 
+The transformation is $dp[i][j][k] = \max \{dp[i][x][k+1] + dp[x+1][j-1][0], dp[i][j][k] \}$ where $boxes[x] == boxes[j]$.
+If there is no such $x$, then $dp[i][j][k] = dp[i][j-1][0] + (k+1)^2$.
+The running time is $O(n^4)$. 
+To pass all the tests, we also need some optimization. That is, when there are consecutive same values, we want to choose $x$
+as the left index, instead of trying every position. But when there are not consecutive intervals, we still need to try each 
+of them.
+
 
 \end{document}
