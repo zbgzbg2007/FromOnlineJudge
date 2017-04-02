@@ -34,6 +34,19 @@ The running time is $O(n)$.
 This could work since each number in $count$ is a lower bound for the machine, which is feasible. (Can be proved by induction: the first $i$ machines have optimal moves and we do not need to worry about them.)
 BFS could work, but the running time is too big since the number of states are very big.
 
+\paragraph{521}
+We do not need to consider subsequence, the candidate should be the entire string. Then the problem is simplified. If the length of the two strings are different, return the bigger length. Otherwise if the two strings are different, return 
+the length of any one, othwerwise return -1. 
+
+\paragraph{522}
+Notice that the candidate should only be the entire string, not its proper subsequence.
+This is because if the candidate has a proper subsequence satisfying the condition, the candidate string also satisfies the 
+condition. So we only consider each entire string and check if it is subsequence of other strings. 
+Before comparing strings, we sort the strings according to their lengths. Take care of the iter() funciton. 
+The running time is $O(mn)$, where $n$ is the number of strings, and $m$ is the length of the longest string.
+
+
+
 \paragraph{523}
 For each index $i$, we first compute the sum from 0 to $i$ and then modulo $k$. We record this number $x_i$ for each index in a dict.
 For current index $j$, we check $x_j$: if $x_j$ first appears at $i$ before and $j - i > 1$, then output True; or if $x_j == 0$ and $j > 0$, then output True.
@@ -140,6 +153,19 @@ The running time is $O(n^4)$.
 To pass all the tests, we also need some optimization. That is, when there are consecutive same values, we want to choose $x$
 as the left index, instead of trying every position. But when there are not consecutive intervals, we still need to try each 
 of them.
+
+\paragraph{547}
+Union-find sets. Scan the input graph and union two friend sets. Return the number of final sets. We use the minimum number
+in the set as its representative. 
+
+
+\paragraph{548}
+Divide and conquer. Enumerate each possible index $j$. For each $j$, split the array into two parts. For each such part, 
+enumerate the split index and store the sum if the two subarray have the same sum. When there exists a stored value 
+from both parts, return true, otherwise false.
+Running time $O(n^2)$ since for each $j$, the computation can be done in linear time.
+
+
 
 
 \end{document}
