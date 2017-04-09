@@ -166,6 +166,25 @@ from both parts, return true, otherwise false.
 Running time $O(n^2)$ since for each $j$, the computation can be done in linear time.
 
 
+\paragraph{549}
+Dynamic programming on tree. The state is a tuple of three lengths: the longest consecutive path less or equal to the root 
+value, the longest consecutive path greater or equal to the root value, and the longest consecutive path in the subtrees 
+without current root. The running time is linear.
+
+\paragraph{554}
+If the line crosses least bricks, then that is where most lines can be split. That is, we want to find a number that can split
+most rows. For each row, the number is the sum of the bricks on the left of the line. We count such sums for all rows in 
+a dictionary and choose the max value. The running time is linear to the number of bricks.
+
+
+\paragraph{556}
+Similar to find the next permutation. Transform the number into a list of digits. 
+Find the longest increasing sequence from the end and then process this sequence.
+Assume this sequence is $A[i:]$, then find the smallest element $A[j]$ in this sequence that is larger than $A[i-1]$ and swap
+them. Next, sort $A[i:]$ and transform the list back to the number. Take care of the corner case.
+
+\paragraph{557}
+String processing. Split the intput into words, reverse the words and then join them by space.
 
 
 \end{document}
