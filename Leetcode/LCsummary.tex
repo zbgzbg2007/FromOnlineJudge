@@ -171,11 +171,66 @@ Dynamic programming on tree. The state is a tuple of three lengths: the longest 
 value, the longest consecutive path greater or equal to the root value, and the longest consecutive path in the subtrees 
 without current root. The running time is linear.
 
+\paragraph{551}
+For 'A', we count the number; for 'L', we check if there is a substring of 'LLL'. This can be done in linear time.
+
+\paragraph{552}
+There are two methods.
+\begin{itemize}
+\item First, this could be solved by dynamic programming. Let $d[i]$ be the number of possible rewardable records that do not contain 'A' and
+have length $i$. Then the recurrsive transformation is $d[i] = d[i-1] + d[i-2] + d[i-3]$, which means the records of length $i$
+can be obtained by adding 'P', 'PL' or 'PLL' at the end of a record of length $i-1$, $i-2$ or $i-3$ respectively.
+After that, we just need to count the number of records that contains one 'A', which is the sum of $d[i] * d[n-i-1]$ for all
+$i>=0$. The running time is $O(n)$. 
+
+\item This could also be solved by using matrix multiplication. We define a vector $f[i][j][k]$ that stores the number of 
+rewardable records that have length $i$ and have exactly $j$ of 'A' and $k$ of 'L' at the end. Then we can find the following
+relation: $f[i] = A * f[i-1]$, where $A$ is the matrix:
+\[A=\left[ 
+\begin{array}{cccccc}
+1 & 1 & 1 & 0 & 0 & 0 \\ 
+1 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 1 & 1 & 1 & 1 & 1 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+\end{array} \right]. \]
+Then we can compute the final vector $f[n]$ by using fast exponentiation by squaring. The running time is $O(\log n)$.
+\end{itemize}
+
+
+\paragraph{553}
+There are two ways to solve this problem. One is to enumerate all the possible expressions and find the best, and the other
+is to prove the best express always has the same form. We will show both methods.
+\begin{itemize}
+\item First, we show enumeration method. The idea is divide and conquer. We enumerate the position (that is the index of the array) 
+$i$ to divide the array into two parts and compute the possible
+max and min results of the two parts. Then we can obtain the possible max and min results of the whole array. Now we only need
+to care about how to add parenthesis. We can store the expression string for the results of two subarrays and combine them 
+to obtain the expression string of results of the whole array. Assume the position $i$ is not the last one. Then there are
+division after this position that are operated before the division at $i$. So we need to add parenthesis to the right part of
+$i$. If $i$ is the last one position, then we don't need to add parenthesis. The running time for this will be $O(n!)$, which
+could be improved by memorization into $O(n^3)$.
+
+\item The second method is to prove the best expression should always be the form $a / (b / c / d / \dots / z)$.
+The proof is by induction. The hypothesis assumption is that for $k>2$ numbers, the max expression is $a_0 / (a_1 / a_2 / \dots
+/ a_{k-1})$ and the min expression is $a_0 / a_1 / a_2 / \dots / a_{k-1}$.
+The base case is when $k = 3$. For any $k+1$ numbers, suppose the assumption is correct for any $x <= k$ numbers. Now consider the
+position $i$ for the last division operation. No matter where $i$ is, the left part has the max form and the right part has the 
+min form, which can be combined into the max form of the whole sequence. Q.E.D.
+\end{itemize}
+
+
 \paragraph{554}
 If the line crosses least bricks, then that is where most lines can be split. That is, we want to find a number that can split
 most rows. For each row, the number is the sum of the bricks on the left of the line. We count such sums for all rows in 
 a dictionary and choose the max value. The running time is linear to the number of bricks.
 
+\paragraph{555}
+We enumerate each possible position as the cut point and then choose the best among them as result. 
+First we need to preprocess the strings so that each string is the max between its current order and its reverse order.
+This is because when the cut point is not in a string $s$, it should always be chosen in the order that forms a larger string.
+For the string that contains the cut point, we try all cut points in the two orders. The running time is $O(n^2)$. 
 
 \paragraph{556}
 Similar to find the next permutation. Transform the number into a list of digits. 
