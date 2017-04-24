@@ -241,5 +241,26 @@ them. Next, sort $A[i:]$ and transform the list back to the number. Take care of
 \paragraph{557}
 String processing. Split the intput into words, reverse the words and then join them by space.
 
+\paragraph{561}
+Sort the array and then sum the numbers with even indices, since these will be the minimum of the pair. 
+This runs in $O(n \log n)$ time.
+
+\paragraph{562}
+We could simply check each row, each column, each diagonal and each anti-diagonal to count the longest line. Or we could just
+memory those values for each cell if there is one in it and then iteratively compute all four values for all cells and choose
+the maximum of them. Both methods runs in linear time to the number of cells.
+
+\paragraph{563}
+Recursively compute the sum of the values and the tilt of the subtree rooted at current node. This runs in linear time.
+
+\paragraph{564}
+The closest palindrome could either has the same number of digits as $n$ or not. If not, then the answer is either of the form
+$100 \dots 001$ or the form $99\dots99$. For example, the answer for 10 is 9, and the answer for 99 is 101. 
+If they have the same number of digits, then the right part needs to be the same as the left part except for the middle one
+or two digits. This make sure the change is minimized. For the middle one or two digits, we just need to check +1, -1 and
+itself (if two digits then check the left and assign the right the same value), since other change will increase the absolute 
+difference. We collect all possible values and then choose from these the nearest one as result. 
+The running time is linear to the length of the given number.
+
 
 \end{document}
