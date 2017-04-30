@@ -12,6 +12,19 @@
 I will try to summarize the methods, the code will not be here.
 \end{abstract}
 
+\paragraph{502}
+This could be solved by heap. We can use two heaps $heap1$ and $heap2$: $heap1$ (max heap) storing the profits of the projects 
+whose capital is less than our current capital $W$ and $heap2$ (min heap for capital) storing the capitals and profits whose
+capital is more than $W$. Each time we choose the top of $heap1$ to add into our solution and then update $W$. 
+Then we pop all possible projects from $heap2$ and push them to $heap1$. After $k$ times, the $W$ is the answer.
+We could also just use one max heap (that is the same as $heap1$ above). We first construct an array whose elements are the tuple
+(profit, capital) of all projects. And then we sort the array by capital. 
+Now for each of the $k$ iterations, we only need to pop all possible projects in the array and then push them to the max heap. 
+Since the array is sorted by capitals, we have all possible projects in our heap.
+Note that the pop operation only needs $O(1)$ time for list.
+The running time is $O(n \log n)$ where $n$ is the total number of projects. This is because for two heaps we push all of them 
+into heaps, and for one heap we sort all the projects.
+
 \paragraph{507}
 Try every possible number in $[2, \sqrt num]$. If $i$ is a divisor, then subtract $i$ and $num/i$. 
 Running time is $O(\sqrt n)$.
@@ -241,6 +254,16 @@ them. Next, sort $A[i:]$ and transform the list back to the number. Take care of
 \paragraph{557}
 String processing. Split the intput into words, reverse the words and then join them by space.
 
+\paragraph{560}
+This can be solved by hashmap. For each index $i$, we could have a sum, denoted by $s_i$ for the previous $i$ numbers. 
+For each such sum, we record the number of such indices. 
+That is, $index[s]$ stores the number of indices $i$ we have seen such that $s_i$ is equal to $s$.
+Then for each number $x$ in the array, we just need to add the number of $index[k-x]$ to our answer.
+The running time is linear to the length of the array.
+
+
+
+
 \paragraph{561}
 Sort the array and then sum the numbers with even indices, since these will be the minimum of the pair. 
 This runs in $O(n \log n)$ time.
@@ -261,6 +284,34 @@ or two digits. This make sure the change is minimized. For the middle one or two
 itself (if two digits then check the left and assign the right the same value), since other change will increase the absolute 
 difference. We collect all possible values and then choose from these the nearest one as result. 
 The running time is linear to the length of the given number.
+
+
+\paragraph{566}
+We can copy the elements from the given matrix to the resulting matrix. An interesting way to do this is using $i/c$ and $i \%
+c$ for $0 \le i \le r * c$. The running time is linear to the number of elements.
+
+\paragraph{567}
+This problem can be solved by sliding window or two pointers.
+To check the permutation, we only need to count the number of each letters in a given substring, which can be represented by an 
+counting array of length 26.
+For sliding window, we try each substring in $s2$ to see if the counting array is the same as that of $s1$.
+For each sliding or movement of the index, we only need to change the counting array for the first letter and end letter, which
+can be done in constant time.
+For two pointers $start$ and $end$, we make sure the substring of $(start, end]$ contains the same letters as $s1$. So when the 
+distance between the two pointers is the same as the length of $s1$, we find the right substring. To make sure the invariant, 
+we do similar thing as sliding window. First find the counting array for $s1$. Then we check the new letter at index $end$: if
+there are more such letter in $s1$ then our current substring, then we subtract 1 for this letter in the counting array; else
+we move the $start$ index forward until we find a letter the same as $end$.
+Now $end$ can move again.
+The running time is linear to the length of $s2$ since the two methods just remove the two index positions in $s2$.
+
+\paragraph{568}
+This probelm can be solved by dynamic programming.
+We use $dp[i][j]$ to store the max number of vacation days we can obtain in first $i-1$ weeks and ending at the $j$-th city.
+Then we have $dp[i][j] = \max_{flights[x][j] == 1 || x == j} \{ dp[i][j], dp[i-1][x] + days[j][i] \}$. 
+That is, we can try all possible ways to reach $j$-th city and get the max number of vacation days.
+The running time is $O(n^2 k)$.
+
 
 
 \end{document}
