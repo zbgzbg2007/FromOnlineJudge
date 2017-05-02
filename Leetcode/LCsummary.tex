@@ -12,6 +12,13 @@
 I will try to summarize the methods, the code will not be here.
 \end{abstract}
 
+\paragraph{483}
+This could be solved by binary search. Assume we know the representation of $n$ base $k$, that is we know the number of 
+the 1's. Then we can use binary search to guess the correct $k$, that is just a geometric series of the same length as the
+number of 1's. We know the length of 1's can be at most $O(\log n)$, and the binary search needs $O(\log n)$ time (two 
+endpoints are 2 and $n+1$), so the total running time is $O(\log ^2 n)$.
+
+
 \paragraph{502}
 This could be solved by heap. We can use two heaps $heap1$ and $heap2$: $heap1$ (max heap) storing the profits of the projects 
 whose capital is less than our current capital $W$ and $heap2$ (min heap for capital) storing the capitals and profits whose
