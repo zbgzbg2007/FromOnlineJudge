@@ -319,6 +319,31 @@ Then we have $dp[i][j] = \max_{flights[x][j] == 1 || x == j} \{ dp[i][j], dp[i-1
 That is, we can try all possible ways to reach $j$-th city and get the max number of vacation days.
 The running time is $O(n^2 k)$.
 
+\paragraph{572}
+There are two ways to solve this problem. The first is to compare $t$ with each subtree of $s$ recursively, which needs $O(mn)$ time for $n = |s|$ and $m = |t|$. The second is to convert the tree into a different representation. It could be a
+string that represent the tree as Leetcode uses, or a hash function that maps each node to a distinct value according to its
+subtree. This could be done in linear time and the comparison can be done in linear time by some advaced algorithm, like KMP 
+for finding the substring. So the total running time is $O(m + n)$.
+
+\paragraph{573}
+This is a math problem. The answer must be a tour that the squirrel visits one nut and go to the tree, and after that it just 
+go to each nut and back to the tree. So we only need to find the first nut it should visit. The distance of the tour can be 
+seen as twice of the sum of the distances between all nuts and the tree minus the difference between the distance from the first nut to the tree and plus that from the first nut to the squirrel. So we can try each nut to find the minimum tour.
+
+
+
+\paragraph{575}
+We only need to compare the totall number of candies and the total number of kinds. If the number of kinds is greater than 
+half of the number of candies, then there is no way to distribute all the kinds to sister. So the answer for this case is 
+just half of the number of candies. Otherwise, there is always a way to give all kinds of candies to sister, so the answer is
+the number of kinds.
+
+\paragraph{576}
+For each movement, we can record the number of paths to each cell. This can be done by keeping another empty matrix and 
+for each cell, we record the sum of the numbers in its neighbors. And then replace the original matrix with this new matrix.
+Each time we also collect the numbers in the cells outside of the 
+boundary and add them into the answer variable. This is similar to the computation of the Game of Life.
+
 
 
 \end{document}
