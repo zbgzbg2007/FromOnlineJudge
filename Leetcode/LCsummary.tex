@@ -12,6 +12,25 @@
 I will try to summarize the methods, the code will not be here.
 \end{abstract}
 
+\paragraph{480}
+There are two ways to solve this problem. 
+\begin{itemize}
+\item The first is to maintain a sorted array for the current interval and each time we 
+see a new element we add it into the sorted array by binary search and then remove the oldest element if needed. 
+The complexity of the addition and removement operations are the key point for this method. If we use C++ and choose set
+as the data structure, these operation can be done in $O(\log n)$ time (but we also need to maintain the iterator for the 
+median since we need to find it for each interval and set does not provide binary search API), and the running time is 
+$O(n\log k)$ for $n$ and $k$ being the length of the list and interval. If we choose list in Python, then the running time 
+is $O(nk)$ since both of the operations need $O(k)$ time.
+
+\item The second method is to maintain two heaps for the interval: one is max-heap for $k/2$ smaller elements and one is min-heap
+for $k/2$ larger elements. We also need a hashmap or dictionary to record the elements that should be removed from the heaps and 
+two integers to record the valid elemtns in the two heaps. These are needed because there could be some elements in the heaps
+that are outside of the interval and we cannot remove all invalid elements when the interval moves. 
+So when we pop the heaps, we need to make sure the element is valid or not. 
+The running time for this is $O(n \log n)$ since the heap could contain $O(n)$ elements.
+\end{itemize}
+
 \paragraph{483}
 This could be solved by binary search. Assume we know the representation of $n$ base $k$, that is we know the number of 
 the 1's. Then we can use binary search to guess the correct $k$, that is just a geometric series of the same length as the
