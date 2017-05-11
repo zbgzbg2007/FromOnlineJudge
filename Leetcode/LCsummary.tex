@@ -5,12 +5,36 @@
 \title{
 {Summary for LC alg problems}
 }
-\author{Baigong Zheng}
+\author{B. Z.}
 \date{}
 \maketitle
 \begin{abstract}
 I will try to summarize the methods, the code will not be here.
 \end{abstract}
+
+\paragraph{459}
+This problem can be solved in many ways. Here we show two menthods. Let $n$ be the length of the string $s$.
+\begin{itemize}
+\item The first method is to verify each substring of length $i$ for $1 \le i \le n/2$. Each verification needs $O(n)$ time,
+so the running time is $O(n^2)$.
+\item The second method is faster and simpler. 
+\begin{itemize}
+\item Algorithm. We concatenate two input strings to obtain $s'$, that is $s' = s + s$.
+Then we delete the first and the last character to obtain $s^*$, that is $s^* = s'[1:-1]$. Now if we can find s in $s^*$,
+return true, otherwise return false. The running time is $O(n)$. 
+\item Proof. If $s$ consists of repeated substrings, then it is obvious that our algorithm outputs true. So we only need 
+to prove that if our algorithm outputs true, then $s$ consists of repeated substrings. We can prove the correctness by 
+induction. Assume all the indices are 0-based. Let $p$ be the smallest index starting from which we find the appearance of 
+$s$ in $s^*$. Let $t = s[0:p]$. Then we know t is a prefix of $s$ and also a suffix of $s$. That is $s[p:2p] = 
+t$ since $s$ matches $s^*$ starting from index $p$ and similarly $s[-p:] = t$. Continue this argument, we know that
+$s[kp:(k+1)p] = t$ if $(k+1)p \le n$. If $n \% p == 0$, then this property shows $s$ consists of $n/p$ number of $t$'s 
+and we are done. So assume $n \% p == a != 0$. Then we find that the substring $x = s[-a:]$ is also a prefix of $t$ and a 
+suffix of $t$. Now we are in a case that seems familiar. So we repeat the above argument and then we find that either $t$ 
+consists of repeated $x$ (if $p \% a == 0$) or there is another substring $y$ of $x$ that have the same property (if $p \% a
+!= 0$). Note that the length of $y$ is smaller than $x$ and we can continue this argument until $p' \% a' == 0$. This is 
+always possible since the endpoint is when $a' == 1$. This means all the prefix substrings consists of repeated strings of 
+length $a'$, which is a contradiction since $a' != p$ and we should find $a'$ as the smallest index instead of $p$.
+\end{itemize}
 
 \paragraph{463}
 We count the boundary for each cell with 1. If the neighbor is 0 or the boundary of the grid, we add one to answer.
