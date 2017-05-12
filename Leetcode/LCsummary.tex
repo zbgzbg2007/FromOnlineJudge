@@ -12,6 +12,17 @@
 I will try to summarize the methods, the code will not be here.
 \end{abstract}
 
+\paragraph{456}
+We solve the problem iteratively. We go through the list from right to left once and record the information in the following 
+way. We use $s^*_3$ to store the maximum value of $s_3$ so far, that is for all the values 
+we have seen, $s^*_3$ is the maximum value such that there is another value whose index is smaller than its.
+We use a stack $l$ to store the candidates of $s_3$ so far, whose values are monotone and contains the $s_2$ for $s^*_3$.
+Let $x$ be the next value we will check. If $x < s^*_3$, then $x$ could be $s_1$ and we already find a 
+pattern and return true; otherwise we pop the values in $l$ until the top is not smaller than $x$. The largest popped value from
+$l$ will become the new $s^*_3$ since all the poped values should be larger than $s^*_3$ (otherwise, if the smaller value is 
+on the left of $s^*_3$, then we should find the pattern and if it is on the right of $s^*_3$ then it should be popped already) 
+and we push $x$ into $l$, which will be the new $s_2$. This can be done in liear time.
+
 \paragraph{459}
 This problem can be solved in many ways. Here we show two menthods. Let $n$ be the length of the string $s$.
 \begin{itemize}
