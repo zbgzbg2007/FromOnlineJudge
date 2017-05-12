@@ -9,7 +9,7 @@ class Solution(object):
         """
         repeat, cnt = [], []
         j, n, m = 0, len(s1), len(s2)
-        for k in range(n1):
+        for k in range(min(n1, 3*m)): # choose a smaller value so that either we already find a cycle or there is no such cycle
             for i in range(n):
                 if s1[i] == s2[j]:
                     if j == m-1:
