@@ -51,6 +51,40 @@ length $a'$, which is a contradiction since $a' != p$ and we should find $a'$ as
 We count the boundary for each cell with 1. If the neighbor is 0 or the boundary of the grid, we add one to answer.
 This can be done in $O(nm)$ time for $n$ and $m$ being the sizes of the grid.
 
+\paragraph{466}
+Let $S1 = s1 * n1$ and $S2 = s2 * n2$. We want to compute how many $s2$ we can find in $S1$ and then we know how many $S2$ can 
+be found in $S1$. To save the time, we want to find the cyclical appearance of $s2$ in $S1$, that is, the indices in $s1$ that 
+matching elements in $s2$ do not change any more. For example, $s2[0]$ always matches $s1[i]$ for some fixed $i$ and $s2[1]$ 
+matches $s1[j]$ for some fixed $j$ where $i$ and $j$ do not change.
+If we find these, then we do not need to match strings in the cyclical appearance. Then the matching can be seen as three parts:
+before we find the cyclical appearance of $s2$, the cyclical appearance of $s2$ and the rest part that cannot form a cyclical 
+appearance. 
+We store the indices of $s1$ that successfully matches $s2[-1]$ in a list $repeat$ and store the number of $s1$ we have seen in 
+a list $cnt$, that is $cnt[i]$ corresponds to the (0-based) number of $s1$ when we see $repeat[i]$. 
+Now when we find a new value $repeat$ that appears in $repeat$ before, we know there is a cyclical appearance. 
+Then we can compute the number of $s2$ in the three parts. The first part is the number of elements in $repeat$ before the 
+cyclical appearance starts; the second part is the number of $s2$ in the cyclical appearance times the number of cycles; and 
+the third part is the number of $repeat$ in the cyclical appearance that are in the rest $S1$. 
+We can use $cnt$ to count the number of $s1$ we have used for the third part.
+
+Let $n$ and $m$ be the length of $s1$ and $s2$. To compute the lists $repeat$ and $cnt$, we only need at most $2m+2$ number of 
+$s1$. If there is no cyclical appearance in $2m+2$ number of $s1$'s, then there is no matching from $s2$ to repeatition of $s1$.
+This is because we can always find the start of a cyclical appearance (which may not be $s2[0]$) in $m+1$ number of $s1$ if it 
+exists. The reason is as follows.
+Each time we try a new copy of $s1$, we have at least one element of $s2$ that is matched in this $s1$ copy.
+Then for each copy of $s1$, we have a substring $x$ of $s2$ that are matched in this copy. 
+Consider the first element in $x$. When this element repeats, we have a cyclical appearance.
+There can be at most $m$ different elements as the start of $x$, so when wen try $m+1$ number of $s1$, we must either find the
+start of the cyclical appearance, or there is no matching between $s2$ and any repeatitions of $s1$. 
+Then in $2m+2$ number of $s1$, we must find that $s2[-1]$ is repeated in the cyclical appearnce.
+So to find the cyclical appearance of $s2$, we only need at most $3m$ number of $s1$.
+The real number of $s1$ we try is $\min \{ n1, 3m\}$, since $n1$ may be very small so that we do not need to find the cyclical 
+appearance. 
+The running time for this will be $O(mn)$ if $n1 > 3m$ and $O(nn1)$ if $n1 <= 3m$.
+
+
+
+
 \paragraph{480}
 There are two ways to solve this problem. 
 \begin{itemize}
