@@ -82,7 +82,15 @@ The real number of $s1$ we try is $\min \{ n1, 3m\}$, since $n1$ may be very sma
 appearance. 
 The running time for this will be $O(mn)$ if $n1 > 3m$ and $O(nn1)$ if $n1 <= 3m$.
 
-
+\paragraph{474}
+This is similar to 0-1 knapsack problem. We could solve this by dynamic programming. Let $dp[k][i][j]$ denote the max number 
+of strings we can obtain from the first $k$ strings and there are $i$ 0's and $j$ 1's left. Let $nums[k][0]$ and $nums[k][1]$ 
+denote the number of 0's and 1's in the $k$th string.
+Then we know $dp[k][i][j] = \max \{ dp[k][i][j], dp[k-1][i+nums[k][0]][j+nums[k][1]]+1 \}$ if $i+nums[k][0] \le m$ and 
+$j+nums[k][1] \le n$. We can also simplify this by using a 2-dimensional list $dp[i][j]$ and then go through the $i$ and $j$ 
+in the increasing order. The result is the maximum value in $dp$.
+The running time is $O(mnl+N)$ where $l$ is the number of the strings and $N$ is the total length of
+all strings.
 
 
 \paragraph{480}
