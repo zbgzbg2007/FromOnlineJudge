@@ -9,8 +9,17 @@
 \date{}
 \maketitle
 \begin{abstract}
-I will try to summarize the methods, the code will not be here.
+I will try to summarize the methods, the code will not be included in this file.
 \end{abstract}
+
+\paragraph{139}
+This can be solved by dynamic programming. Let $dp[i]$ denote if $s[:i]$ can be obtained by the words in the dictionary. We 
+store all the words in a set so that we can search them in $O(1)$ time. We try index $i$ from 1 to $len(s)$ and for each index 
+we want to know if $dp[i]$ is true or not. If it is true, then there is another index $j < i$ such that $dp[j]$ is true and 
+$s[j:i]$ can be found in the dictionary. The running time is $O(n^2 + m)$ where $n$ is the length of the input word $s$ and 
+$m$ is the length of the dictionary.
+
+
 
 \paragraph{456}
 We solve the problem iteratively. We go through the list from right to left once and record the information in the following 
@@ -81,6 +90,18 @@ So to find the cyclical appearance of $s2$, we only need at most $3m$ number of 
 The real number of $s1$ we try is $\min \{ n1, 3m\}$, since $n1$ may be very small so that we do not need to find the cyclical 
 appearance. 
 The running time for this will be $O(mn)$ if $n1 > 3m$ and $O(nn1)$ if $n1 <= 3m$.
+
+\paragraph{472}
+This problem can be solved in different ways. The first is to use dynamic programming, which is similar to the problem 139.
+The second way is to use Trie and search the word in the Trie tree. We only talk about the first method, since it is simple 
+to write and analyze, and it is more efficient. The worse case running time for the second method can be $O(2^n)$ since 
+each time we see an end of a short word, we need to decide if we should continue the current longer word (that is we follow 
+the current subtree) or jump to the root of the tree and start again. So totally the running time could be exponential to the
+length of the word. The first method is to try dynamic programming for each word to see if it could be decomposed into other 
+words. We first sort the words according to their lengths in the increasing order for the longer word can only be decomposed 
+into short words. For each word, we apply the same method as probem 139 to see if it could be obtained from previous words. 
+After that, we add the current word into our dictionary set and continue. The totall running time will be $(n^2m)$ where $n$ 
+is the max length of words, and $m$ is the number of words.
 
 \paragraph{474}
 This is similar to 0-1 knapsack problem. We could solve this by dynamic programming. Let $dp[k][i][j]$ denote the max number 
@@ -444,6 +465,19 @@ for each cell, we record the sum of the numbers in its neighbors. And then repla
 Each time we also collect the numbers in the cells outside of the 
 boundary and add them into the answer variable. This is similar to the computation of the Game of Life.
 
+\paragraph{581}
+We can store the sorted list in another list $A$ and then find the first and last elements in $A$ that are different from the 
+given list, this is the endpoints of the wanted subsequence. If there is no such elements, then the given list is sorted and 
+we need to return 0.
 
+\paragraph{582}
+We can build the tree directly by dictionary and then search the tree from the given point and store all the visited nodes.
+The running time is linear.
+
+\paragraph{583}
+This problem is the simplified version of Edit Distance and can be solved by dynamic programming. Let $dp[i][j]$ denote the 
+minimum number of deletions needed to make $word1[:i]$ and $word2[:j]$ the same. Then $dp[i][j] = \min \{ dp[i-1][j], 
+dp[i][j-1] \} + 1$ if $word1[i] != word2[j]$ and $dp[i][j] = dp[i-1][j-1]$ if $word1[i] == word2[j]$. 
+The running time is $mn$ for $m$ and $n$ being the lengths of two words.
 
 \end{document}
