@@ -480,4 +480,7 @@ minimum number of deletions needed to make $word1[:i]$ and $word2[:j]$ the same.
 dp[i][j-1] \} + 1$ if $word1[i] != word2[j]$ and $dp[i][j] = dp[i-1][j-1]$ if $word1[i] == word2[j]$. 
 The running time is $mn$ for $m$ and $n$ being the lengths of two words.
 
+\paragraph{587}
+Just need to compute the convex hull of the given points.
+
 \end{document}
