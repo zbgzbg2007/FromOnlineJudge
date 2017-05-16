@@ -56,6 +56,16 @@ always possible since the endpoint is when $a' == 1$. This means all the prefix 
 length $a'$, which is a contradiction since $a' != p$ and we should find $a'$ as the smallest index instead of $p$.
 \end{itemize}
 
+\paragraph{461}
+We can first convert the two numbers into binary strings by bin or formatting string. For example, $'{0:08b}'.format(6)$ gives 
+$'00000110'$ as output. Here, ${}$ places a variable into a string; $0$ takes the variable at argument position 0 
+(the 0th argument to format); 
+$:$ adds formatting options for this variable (otherwise it would represent decimal 6); 
+$08$ formats the number to eight digits zero-padded on the left;
+$b$ converts the number to its binary representation.
+Another way to write this is $format(6, '08b')$. We use this instead of $bin$ function because the length of the two strings 
+may be different.
+
 \paragraph{463}
 We count the boundary for each cell with 1. If the neighbor is 0 or the boundary of the grid, we add one to answer.
 This can be done in $O(nm)$ time for $n$ and $m$ being the sizes of the grid.
@@ -139,6 +149,9 @@ the 1's. Then we can use binary search to guess the correct $k$, that is just a 
 number of 1's. We know the length of 1's can be at most $O(\log n)$, and the binary search needs $O(\log n)$ time (two 
 endpoints are 2 and $n+1$), so the total running time is $O(\log ^2 n)$.
 
+\paragraph{498}
+We can follow the rule to generate the answer. First we set a flag to represent the direction, and each time we go beyond the 
+boundary, we move the index back. For the second half of the matrix, we need to move one index two steps back.
 
 \paragraph{502}
 This could be solved by heap. We can use two heaps $heap1$ and $heap2$: $heap1$ (max heap) storing the profits of the projects 
