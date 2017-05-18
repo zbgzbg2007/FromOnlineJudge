@@ -19,7 +19,12 @@ we want to know if $dp[i]$ is true or not. If it is true, then there is another 
 $s[j:i]$ can be found in the dictionary. The running time is $O(n^2 + m)$ where $n$ is the length of the input word $s$ and 
 $m$ is the length of the dictionary.
 
-
+\paragraph{402}
+We go through the string from left to right and maitain a stack for the seen numbers. The numbers in the stack is in the 
+increasing order. When the new number is smaller then the top of the stack, we pop out the numbers in the stack until the top
+number is not bigger than the new number or we have already popped $k$ numbers. After this, if we still need to delete some 
+numbers, we just continue popping from the stack. The numbers in the stack is the result string. 
+This can be done in linear time.
 
 \paragraph{456}
 We solve the problem iteratively. We go through the list from right to left once and record the information in the following 
@@ -100,6 +105,13 @@ So to find the cyclical appearance of $s2$, we only need at most $3m$ number of 
 The real number of $s1$ we try is $\min \{ n1, 3m\}$, since $n1$ may be very small so that we do not need to find the cyclical 
 appearance. 
 The running time for this will be $O(mn)$ if $n1 > 3m$ and $O(nn1)$ if $n1 <= 3m$.
+
+\paragraph{467}
+We only need to record the length of the longest substring that ends with different letters. Since there are only lower letters 
+in the inputs, we only need to record 26 numbers for each letter. We can maintain a starting index for current substring and 
+update the lengths each time we see a new letter. The answer is the sum of all the lengths. The running time is linear. 
+
+
 
 \paragraph{472}
 This problem can be solved in different ways. The first is to use dynamic programming, which is similar to the problem 139.
