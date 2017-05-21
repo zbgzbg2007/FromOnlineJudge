@@ -508,4 +508,29 @@ The running time is $mn$ for $m$ and $n$ being the lengths of two words.
 \paragraph{587}
 Just need to compute the convex hull of the given points.
 
+\paragraph{588}
+We can construct a tree as the file system, where each node is either a file or a directory. 
+A node consists of a name, a list of children and a string as content. 
+Then each operation is transformed into the operation in the tree. 
+To speedup the reading operation, we can store the path of a file and its content into a dictionary.
+Thus, the reading only needs constant time. 
+
+
+
+\paragraph{592}
+We can have two integers denote the numerator and denominator of the result. And then just extract the next fraction and add
+it to our result. This can be done in linear time. 
+
+\paragraph{593}
+We can compute the distance between each pair of points and then store them in a counter. If the points can form a square 
+the, there should only be two distances in the counter such that one repeats twice and the other repeats four times.
+This can be done in constant time.
+
+
+\paragraph{594}
+We can count the number of each elements in the list by a dictionary and then for each element $i$, we check if $i+1$ is in 
+our counter and output the max sum of the counts of such $i$ and $i+1$. The running time is linear.
+
+
+
 \end{document}
