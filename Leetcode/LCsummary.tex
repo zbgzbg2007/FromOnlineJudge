@@ -12,6 +12,11 @@
 I will try to summarize the methods, the code will not be included in this file.
 \end{abstract}
 
+\paragraph{14}
+For each leter, we check all the strings to see if it is contained by all strings. If we find it is not in one string, or we  
+reach the end of one string, we output the prefix ending at the current index. The running time is $(n*m)$ where $n$ is the 
+length of the longest common prefix and $m$ is the number of strings.
+
 \paragraph{139}
 This can be solved by dynamic programming. Let $dp[i]$ denote if $s[:i]$ can be obtained by the words in the dictionary. We 
 store all the words in a set so that we can search them in $O(1)$ time. We try index $i$ from 1 to $len(s)$ and for each index 
@@ -438,6 +443,11 @@ itself (if two digits then check the left and assign the right the same value), 
 difference. We collect all possible values and then choose from these the nearest one as result. 
 The running time is linear to the length of the given number.
 
+\paragraph{565}
+Each number in the array will be in a cycle, since its in-degree and out-degree will be one. So we store a list of boolean 
+value to denote if the corresponding number is seen before. We go through the list and for each unseen number, we follow the 
+cycle to set the corresponding boolean value to be true and record the size of the cycle. The answer will be the size of the 
+largest cycle. THe running time is linear. 
 
 \paragraph{566}
 We can copy the elements from the given matrix to the resulting matrix. An interesting way to do this is using $i/c$ and $i \%
@@ -530,6 +540,30 @@ This can be done in constant time.
 \paragraph{594}
 We can count the number of each elements in the list by a dictionary and then for each element $i$, we check if $i+1$ is in 
 our counter and output the max sum of the counts of such $i$ and $i+1$. The running time is linear.
+
+\paragraph{598}
+Note that the operation will always be addition for a rectangle whose left index and top index are both 0. So we only need to 
+find the common area of all the operations. That is, we only need to find the two minimum indices for the operations. So the 
+running time is linear. 
+
+
+\paragraph{599}
+We can store the name and its index in list2 in a dictionary first. And then we go through list1 and check if the index sum is
+better then current sum. If better, we replace current answer with a new list with the current name. If equal, then we add the 
+current name into our answer list. The running time is linear.
+
+\paragraph{600}
+This problem can be solved by dynamic programming. Let $dp[i][0]$ and $dp[i][1]$ denote the number of non-negative integers 
+whose binary representations do not contain consecutive ones and have length at most $i$ and the leftmost bit is 0 or 1
+respectively. Then the recursive relation is $dp[i][0] = dp[i-1][0] + dp[i-1][1]$ and $dp[i][1] = dp[i-1][0]$. Assume the 
+length of the binary representation is $n$. Then we compute $dp[i]$ for $0 <= i <= n$. Now we start from the leftmost bit and 
+check if the bit is '1' and if its previous bit is '1'. If the current bit is '1' and the previous is not '1', we add 
+$dp[n-i][0]$ into our answer. This means we fix the previous bits and set the current bit to '0' and count the number of 
+integers. If we find the current bit and privous bit are both '1', then we do this counting for the current bit and then stop
+this process since the later numbers will always contain consecutive ones.
+We also need to add 1 to our answer if there is no '11' in the given number, which means we need to count the given number in
+our answer. The running time is $O(\log n)$.
+We can also use $dp[i]$ to represent $dp[i][0]$, since then $dp[i][1]$ will become $dp[i-1]$. 
 
 
 
