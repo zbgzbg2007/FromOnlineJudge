@@ -525,7 +525,14 @@ Then each operation is transformed into the operation in the tree.
 To speedup the reading operation, we can store the path of a file and its content into a dictionary.
 Thus, the reading only needs constant time. 
 
-
+\paragraph{591}
+We can either solve this problem by DFA (deterministic finite automaton). 
+We have totally 4 kinds of states, 0: start tag, 1: end tag, 2: text, 3: cdata.
+We go through the input with index $i$ starting from $i=1$ (If input is an empty string, return false) and state = 0.
+We also have a stack to store the previous unmatched tag word.
+For each state, we check if the condition is satisfied and transfer to the next state according to the input string.
+Since we only need to go through the input once, the running time is linear.
+It seems that this can also be solved by regular expression, but I'm not sure.
 
 \paragraph{592}
 We can have two integers denote the numerator and denominator of the result. And then just extract the next fraction and add
@@ -565,6 +572,18 @@ We also need to add 1 to our answer if there is no '11' in the given number, whi
 our answer. The running time is $O(\log n)$.
 We can also use $dp[i]$ to represent $dp[i][0]$, since then $dp[i][1]$ will become $dp[i-1]$. 
 
+\paragraph{605}
+We can go through the list and check if each position satisfies the condition. If so, we change it to 1 and continue.
+This can be done in lienar time.
 
+\paragraph{606)
+We can visit each node recursively and return the string for the subtree rooted at the node. If the node is a leaf, we don't 
+add any more parenthesis pair. This can be done in linear time.
+
+\paragraph{609}
+We only need to sparse the input strings to find the directory, the file name, and the content. And then we store the path, 
+which consists of the directory and the file name, in a dictionary, indexed by the content. That is, the value for each 
+content is a list containing all the paths for the duplicate files with that content.
+Then we return the lists whose lengths are greater than one. The running time is linear.
 
 \end{document}
