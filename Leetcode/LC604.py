@@ -7,7 +7,7 @@ class StringIterator(object):
         self.i = 0
         self.s = compressedString
         self.count = 0
-        self.current = 0
+
 
     def next(self):
         """
