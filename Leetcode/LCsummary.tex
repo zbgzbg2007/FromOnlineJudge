@@ -627,9 +627,50 @@ The running time is linear to the sum of the sizes of the trees.
 We can show that the length of the shortest schedule can be computed directly. Let $n$ be the number of intervals needed 
 between two same tasks, $T$ be the number of appearances of the most frequent task in the given list, $m$ be the number of 
 such tasks, $N$ be the size of given list. We can prove the answer will be $\max \{ N, (n+1)*(T-1)+m \}$.
-If $N < (n+1)*(T-1)+m$, then the shortest schedule can be constructed as follows. We first arrange the most frequent task 
-trivially; then we arrange the second most frequent task following the previous task. The order will follow the interval 
-between 
+If $N \le (n+1)*(T-1)+m$, then the shortest schedule can be constructed as follows.
+Let $A$ be the most frequent task. We first arrange $A$ trivially; then we arrange the second most frequent task 
+following the previous task. The order will follow the interval order: the first interval between the first two consecutive 
+$A$'s will be considered first, then the second interval between the second two consecutive $A$'s will be next.
+If $N > (n+1)*(T-1) +m$, then we can insert the rest tasks into the constructed schedule so that the result still satisfies the
+conditions and the length will be $N$.
+
+Consider an example. The given list is $[A(4), B(4), C(4), E(3), F(2), G(2), H(2), J(2), K(2), L(2), M(2), N(2)]$ and $n$ is 6.
+The number in the list shows the frequence of the task. We first arrange $A$ trivially:
+"A++++++A++++++A++++++A"
+The plus means an idle interval. 
+Then we arrange $B$ and $C$ since they are the most frequent tasks.
+"ABC++++ABC++++ABC++++ABC"
+Now we arrange $E$ since it is the most frequent left task.
+"ABCE+++ABCE+++ABCE+++ABC"
+$F$ will be next:
+"ABCEF++ABCEF++ABCE+++ABC"
+And then $G$ will be next:
+"ABCEFG+ABCEF++ABCEG++ABC"
+Following this order, we will find there is one $K$ left:
+"ABCEFGJABCEFHJABCEGHKABC"
+Now we can insert the left $K$ into the beginning:
+"KABCEFGJABCEFHJABCEGHKABC"
+And then for the rest tasks, we just insert them infront of different $A$'s. For example, consider $L$.
+"KLABCEFGJLABCEFHJABCEGHKABC"
+The resulting schedule is still feasible.
+So we can always constrcut such a schedule with length $N$ if $N > (n+1)*(T-1) + m$.
+
+\paragraph{623}
+We can trasverse the tree and record the depth. When we reach the target depth, we add the new node as children and then add the 
+orginal children to new nodes. This can be done in linear time.
+
+\paragraph{624}
+We will go through the arrays and record the minimum $a$ and maximum $b$ of previous arrays. 
+For current array, we find the minimum $x$ and maximum $y$ and choose the maximum of previous best answer, $abs(a-y)$ and 
+$abs(b-x)$ as the current best answer. After the iteration, we output the final best answer.
+The running time is linear.
+
+\paragraph{625}
+Since the factor can only be digits from 2 to 9, we can try each digit in the decreasing order to factor the target and count 
+the factors in a list of length corresponding to the factors. 
+If we can divide the target, and the number consists of those factors in increasing order is not bigger than $2^31$, then we 
+output this number. 
+This can be done in $O(\log n)$ time.
 
 
 \end{document}
