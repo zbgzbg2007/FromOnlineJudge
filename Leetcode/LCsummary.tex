@@ -623,6 +623,13 @@ We traverse the two trees at the same time and combine the values if they are bo
 ignore it and follow the other tree; if both are None, we return None.
 The running time is linear to the sum of the sizes of the trees.
 
+\paragraph{621}
+We can show that the length of the shortest schedule can be computed directly. Let $n$ be the number of intervals needed 
+between two same tasks, $T$ be the number of appearances of the most frequent task in the given list, $m$ be the number of 
+such tasks, $N$ be the size of given list. We can prove the answer will be $\max \{ N, (n+1)*(T-1)+m \}$.
+If $N < (n+1)*(T-1)+m$, then the shortest schedule can be constructed as follows. We first arrange the most frequent task 
+trivially; then we arrange the second most frequent task following the previous task. The order will follow the interval 
+between 
 
 
 \end{document}
