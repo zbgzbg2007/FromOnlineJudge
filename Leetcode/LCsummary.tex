@@ -672,5 +672,15 @@ If we can divide the target, and the number consists of those factors in increas
 output this number. 
 This can be done in $O(\log n)$ time.
 
+\paragraph{630}
+This problem can be solved by greedy method. We first sort the courses by their ending times in the increasing order. 
+Now we go throug the list and maintain the invariant: for the first $k$ courses, we will choose the maximum number of courses 
+with minimum days. We will record the ending time of all chosen courses by a variable $start$ and store the duration time for
+each chosen courses in a max heap. When we see a new course, we try to chose it by updating the ending time $start$ and 
+push its duration time into the max heap. 
+If $start$ is bigger than the ending time of this new course, we will remove the course with the longest duration time.
+This will only happen once and then $start$ will be at most the new ending time.
+The running time is $O(n \log n)$.
+
 
 \end{document}
