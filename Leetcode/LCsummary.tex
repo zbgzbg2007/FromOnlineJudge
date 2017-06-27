@@ -672,6 +672,18 @@ If we can divide the target, and the number consists of those factors in increas
 output this number. 
 This can be done in $O(\log n)$ time.
 
+\paragraph{629}
+This problem can be solved by dynamic programming. Let $dp[i,j]$ be the total number of different arrays of length $i$ that 
+have $j$ inverse pairs. Then we find that given such information about arrays of length $i-1$, we can obtain such information 
+for arrays of length $i$.
+We can insert the last number in the array of length $i-1$ and this can give different number of new inverse pairs.
+For example, if we insert it into the last position, then there is no new inverse pair; if we insert it into the first 
+position, then there are $i-1$ new inverse pairs. So by inserting the last number into different positions, we have 
+$dp[i, j] = \sum_{x = k}^{n-k} dp[i-1, x]$. Then this implies $dp[i, j] = dp[i, j-1] + dp[i-1, j] - dp[i-1, (j-1)-(i-1)]$.
+Note that if $j < 0$, then $dp[i, j] = 0$. And we need to mod the given number.
+So the total running time is $O(nk)$.
+
+
 \paragraph{630}
 This problem can be solved by greedy method. We first sort the courses by their ending times in the increasing order. 
 Now we go throug the list and maintain the invariant: for the first $k$ courses, we will choose the maximum number of courses 
