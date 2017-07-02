@@ -694,5 +694,33 @@ If $start$ is bigger than the ending time of this new course, we will remove the
 This will only happen once and then $start$ will be at most the new ending time.
 The running time is $O(n \log n)$.
 
+\paragraph{632}
+To find the smallest range containing at least one element of each list, we can use a min heap to store one element from each 
+list and then record the range for these elements. Since all the lists are sorted, we initialize the heap by the first 
+element of each list. Then each time we pop the smallest element in the list and add next element in the corresponding list.
+The answer will be the smallest one of these ranges.  This can be proved by induction on the ranges starting with each popped 
+element. The total running time is $O(n \log m)$, where $n$ is the total number of elements and $m$ is the number of lists.
+
+
+\paragraph{633}
+We can try each number in the range $[0, \sqrt(n/2)+1]$ as the smaller square root. If we cannot find a decomposition in this 
+range, then the number cannot be a sum of two squares. The running time is $O(\sqrt(n))$.
+
+\paragraph{634}
+This problem asks the number of derangement of $n$ numbers. We can solve this by recursion. Let $f(n)$ be the number of 
+derangement of $n$ numbers. Then we have $f(n) = (n-1)*(f(n-1) + f(n-2))$. The idea is that, the last number can be placed 
+in $n-1$ different positions, and the number indexed by that position has two choice: either be placed in the last position 
+(which gives the subproblem with $n-2$) or be placed in other position (which gives the subproblem with $n-1$ since we can 
+consider it being indexed by the last position). The running time is linear.
+
+\paragraph{635}
+This problem want us to build a log system. But since the number of operation is small, and since the time is in a nice 
+format, we can use only a list to store the tupe $(id, timestamp)$. When we want to find the logs between a time range, we 
+can choose the appropriate prefix of the timestamp to compare with the time range. This can be done in linear time for each 
+retrieve operation.
+
+
+
+
 
 \end{document}
